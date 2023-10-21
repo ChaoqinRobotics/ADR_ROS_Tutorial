@@ -1,0 +1,3 @@
+maxCorners:    50
+minDistance:   25
+qualityLevel:  0.01

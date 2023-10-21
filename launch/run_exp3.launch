@@ -1,0 +1,8 @@
+  <launch>
+    <arg name="waitTimeSecond" default="5"/>
+
+    <node name="exp3_image_subscriber" pkg="adr_ros_tutorial" type="exp3_image_subscriber" output="screen">
+      <param name="waitTimeSecond" value="$(arg waitTimeSecond)"/>
+      <remap from="image_topic" to="/uav/camera/left/image_rect_color"/>
+    </node>
+  </launch>
