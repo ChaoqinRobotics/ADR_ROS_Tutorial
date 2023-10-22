@@ -54,6 +54,7 @@ target_link_libraries(exp3_image_subscriber
 
 add_executable(exp4_feature_detector
   src/exp4_feature_detector.cpp
+  src/feature_detector.cpp
 )
 target_link_libraries(exp4_feature_detector
   ${catkin_LIBRARIES}
