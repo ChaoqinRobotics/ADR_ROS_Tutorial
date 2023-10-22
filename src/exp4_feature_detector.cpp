@@ -33,7 +33,7 @@ class FeatureDetector {
 
   ros::Subscriber imageSub_;
   ros::Publisher imagePub_;
-  int waitTimeSecond_{30};
+  int waitTimeMilliseconds_{30};
 
   Features features_;
   DetectorParams params_;
@@ -51,7 +51,7 @@ FeatureDetector::FeatureDetector(const ros::NodeHandle& nh,
 }
 
 void FeatureDetector::loadParams() {
-  pnh_.getParam("waitTimeSecond", waitTimeSecond_);
+  pnh_.getParam("waitTimeMilliseconds", waitTimeMilliseconds_);
 
   pnh_.getParam("maxCorners", params_.maxCorners);
   pnh_.getParam("minDistance", params_.minDistance);
@@ -70,7 +70,7 @@ void FeatureDetector::imageCallback(const sensor_msgs::ImageConstPtr& msg) {
   imagePub_.publish(ptrRBG8->toImageMsg());
 
   // cv::imshow("view", ptrRBG8->image);
-  // cv::waitKey(waitTimeSecond_);
+  // cv::waitKey(waitTimeMilliseconds_);
 }
 
 void FeatureDetector::detectFeatures(cv_bridge::CvImageConstPtr imagePtr, const DetectorParams &params, Features &features) {

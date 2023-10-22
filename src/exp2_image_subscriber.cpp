@@ -20,7 +20,7 @@ class ImageSubscriber {
   ros::NodeHandle pnh_;
 
   ros::Subscriber imageSub_;
-  int waitTimeSecond_{30};
+  int waitTimeMilliseconds_{30};
 };
 
 ImageSubscriber::ImageSubscriber(const ros::NodeHandle& nh,
@@ -29,12 +29,12 @@ ImageSubscriber::ImageSubscriber(const ros::NodeHandle& nh,
   imageSub_ =
       nh_.subscribe("image_topic", 1, &ImageSubscriber::imageCallback, this);
 
-  pnh_.getParam("waitTimeSecond", waitTimeSecond_);
+  pnh_.getParam("waitTimeMilliseconds", waitTimeMilliseconds_);
 }
 
 void ImageSubscriber::imageCallback(const sensor_msgs::ImageConstPtr& msg) {
   cv::imshow("view", cv_bridge::toCvShare(msg, "rgb8")->image);
-  cv::waitKey(waitTimeSecond_);
+  cv::waitKey(waitTimeMilliseconds_);
 }
 
 }  // namespace lec2
@@ -48,3 +48,4 @@ int main(int argc, char** argv) {
   ros::spin();
   return 0;
 }
+

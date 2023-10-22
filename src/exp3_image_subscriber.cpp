@@ -21,7 +21,7 @@ class ImageSubscriber {
 
   ros::Subscriber imageSub_;
   ros::Publisher imagePub_;
-  int waitTimeSecond_{30};
+  int waitTimeMilliseconds_{30};
 };
 
 ImageSubscriber::ImageSubscriber(const ros::NodeHandle& nh,
@@ -32,7 +32,7 @@ ImageSubscriber::ImageSubscriber(const ros::NodeHandle& nh,
 
   imagePub_ = nh_.advertise<sensor_msgs::Image>("feature_image",1000);
 
-  pnh_.getParam("waitTimeSecond", waitTimeSecond_);
+  pnh_.getParam("waitTimeMilliseconds", waitTimeMilliseconds_);
 }
 
 void ImageSubscriber::imageCallback(const sensor_msgs::ImageConstPtr& msg) {
@@ -53,7 +53,7 @@ void ImageSubscriber::imageCallback(const sensor_msgs::ImageConstPtr& msg) {
   }
 
   cv::imshow("view", image);
-  cv::waitKey(waitTimeSecond_);
+  cv::waitKey(waitTimeMilliseconds_);
 }
 
 }  // namespace lec3

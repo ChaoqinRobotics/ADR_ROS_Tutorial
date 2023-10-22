@@ -1,12 +1,12 @@
   <launch>
-    <arg name="waitTimeSecond" default="5"/>
+    <arg name="waitTimeMilliseconds" default="5"/>
 
     <!-- Launch Rviz -->
     <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find adr_ros_tutorial)/rviz/exp4.rviz" />
 
     <node name="exp4_feature_detector" pkg="adr_ros_tutorial" type="exp4_feature_detector" output="screen">
       <rosparam file="$(find adr_ros_tutorial)/params/exp4_params.yaml" />
-      <param name="waitTimeSecond" value="$(arg waitTimeSecond)"/>
+      <param name="waitTimeMilliseconds" value="$(arg waitTimeMilliseconds)"/>
       <remap from="image_topic" to="/uav/camera/left/image_rect_color"/>
     </node>
   </launch>
