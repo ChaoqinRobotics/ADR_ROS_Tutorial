@@ -25,6 +25,12 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_executable(exp0_basic_node
+  src/exp0_basic_node.cpp
+)
+target_link_libraries(exp0_basic_node
+  ${catkin_LIBRARIES})
+
 add_executable(exp1_image_subscriber
   src/exp1_image_subscriber.cpp
 )

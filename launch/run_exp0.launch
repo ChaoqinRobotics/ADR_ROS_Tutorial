@@ -1,0 +1,4 @@
+  <launch>
+    <node name="exp0_basic_node" pkg="adr_ros_tutorial" type="exp0_basic_node" output="screen">
+    </node>
+  </launch>
