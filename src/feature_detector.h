@@ -8,6 +8,10 @@ namespace lec4 {
 
 class FeatureDetector {
  public:
+  static constexpr double COLOR_RGB[3] = {0, 255, 0};
+  static constexpr double CIRCLE_RADIUS = 2.0;
+  static constexpr double CIRCLE_THICKNESS = 2.0;
+
   using Features = std::vector<cv::Point2f>;
 
   struct DetectorParams {

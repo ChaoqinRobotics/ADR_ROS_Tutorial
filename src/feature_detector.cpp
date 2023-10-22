@@ -46,7 +46,8 @@ void FeatureDetector::detectFeatures(cv_bridge::CvImageConstPtr imagePtr,
 void FeatureDetector::drawFeatures(cv_bridge::CvImagePtr imagePtr,
                                    const Features &features) {
   for (const auto &ftr : features) {
-    cv::circle(imagePtr->image, ftr, 2, cv::Scalar(0, 255, 0), 2);
+    // cv::circle(imagePtr->image, ftr, 2, cv::Scalar(0, 255, 0), 2);
+    cv::circle(imagePtr->image, ftr, CIRCLE_RADIUS, cv::Scalar(COLOR_RGB[0], COLOR_RGB[1], COLOR_RGB[2]), CIRCLE_THICKNESS);
   }
 }
 
