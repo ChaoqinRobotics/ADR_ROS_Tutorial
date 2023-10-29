@@ -3,6 +3,7 @@
 #include <ros/ros.h>
 #include <memory>
 #include <opencv2/highgui/highgui.hpp>
+#include <sensor_msgs/PointCloud.h>
 
 namespace lec3 {
 
@@ -21,6 +22,7 @@ class ImageSubscriber {
 
   ros::Subscriber imageSub_;
   ros::Publisher imagePub_;
+  ros::Publisher pclPub_;
   int waitTimeMilliseconds_{30};
 };
 
@@ -31,6 +33,8 @@ ImageSubscriber::ImageSubscriber(const ros::NodeHandle& nh,
       nh_.subscribe("image_topic", 1, &ImageSubscriber::imageCallback, this);
 
   imagePub_ = nh_.advertise<sensor_msgs::Image>("feature_image",1000);
+
+  pclPub_ = nh_.advertise<sensor_msgs::PointCloud>("features", 1000);
 
   pnh_.getParam("waitTimeMilliseconds", waitTimeMilliseconds_);
 }
@@ -54,6 +58,21 @@ void ImageSubscriber::imageCallback(const sensor_msgs::ImageConstPtr& msg) {
 
   cv::imshow("view", image);
   cv::waitKey(waitTimeMilliseconds_);
+
+  // Publish corner features;
+  sensor_msgs::PointCloudPtr featurePoints(new sensor_msgs::PointCloud);
+  featurePoints->header.stamp = ros::Time::now();
+  featurePoints->header.frame_id = "image";
+
+  for (int i = 0; i < corners.size(); i++) {
+    geometry_msgs::Point32 ft;
+    ft.x = corners[i].x;
+    ft.y = corners[i].y;
+    ft.z = 1;
+    featurePoints->points.push_back(ft);
+  }
+
+  pclPub_.publish(featurePoints);
 }
 
 }  // namespace lec3

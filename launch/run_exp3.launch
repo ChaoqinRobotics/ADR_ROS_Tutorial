@@ -1,5 +1,5 @@
   <launch>
-    <arg name="waitTimeMilliseconds" default="5"/>
+    <arg name="waitTimeMilliseconds" default="30"/>
 
     <node name="exp3_image_subscriber" pkg="adr_ros_tutorial" type="exp3_image_subscriber" output="screen">
       <param name="waitTimeMilliseconds" value="$(arg waitTimeMilliseconds)"/>
